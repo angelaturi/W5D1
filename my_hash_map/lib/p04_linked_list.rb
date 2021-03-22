@@ -14,13 +14,22 @@ class Node
   end
 
   def remove
-    # optional but useful, connects previous link to next link
-    # and removes self from list.
+    
+    self.prev.next = (self.prev ? self.next : nil)
+    self.next.prev = (self.next ? self.prev : nil)
+    
   end
 end
 
 class LinkedList
+
+  # include Enumerable
+
   def initialize
+    @head = Node.new
+    @tail = Node.new
+    head.next = tail
+    tail.prev = head
   end
 
   def [](i)
@@ -53,7 +62,17 @@ class LinkedList
   end
 
   def each
+    node = head
+    loop do
+      yield node
+      node = node.next
+      break if node == tail
+    end
   end
+
+  private
+
+  attr_reader :head, :tail
 
   # uncomment when you have `each` working and `Enumerable` included
   # def to_s
