@@ -4,6 +4,12 @@ end
 
 class Array
   def hash
+    sum = ""
+    self.each do |ele|
+      sum += ele.to_s(2) 
+    end
+
+    sum.to_i
   end
 end
 
