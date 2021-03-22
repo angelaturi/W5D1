@@ -1,3 +1,5 @@
+require 'byebug'
+
 class Node
   attr_reader :key
   attr_accessor :val, :next, :prev
@@ -19,6 +21,7 @@ class Node
 
   def remove
     previous = self.prev
+    debugger
     if previous
       previous.next = @next
     end 
@@ -42,7 +45,6 @@ class Node
 end
 
 class LinkedList
-  attr_reader :head
   include Enumerable
 
   def initialize
@@ -81,10 +83,10 @@ class LinkedList
     node = Node.new(key, val)
 
     tail.prev.next = node
-    tail.prev = node
-
     node.prev = tail.prev
+    
     node.next = tail
+    tail.prev = node
     node
   end
 
@@ -115,7 +117,7 @@ class LinkedList
 
   private
 
-  attr_reader :tail #:head, 
+  attr_reader :tail, :head
 
   # uncomment when you have `each` working and `Enumerable` included
   def to_s
