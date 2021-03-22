@@ -10,6 +10,7 @@ class HashSet
   end
 
   def include?(key)
+    
   end
 
   def remove(key)
