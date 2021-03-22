@@ -1,3 +1,5 @@
+require 'byebug'
+
 class Integer
   # Integer#hash already implemented for you
 end

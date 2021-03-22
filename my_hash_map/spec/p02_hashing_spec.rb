@@ -1,3 +1,4 @@
+require 'byebug'
 require 'rspec'
 require 'p02_hashing'
 
@@ -67,7 +68,7 @@ describe "Hashing" do
     it "should hash to an integer" do
       expect({a: 1}.hash).to be_a(Integer)
     end
-
+    
     it "should hash deterministically" do
       a = {a: "a", b: "b"}
       expect(a.hash).to eq(a.hash)
