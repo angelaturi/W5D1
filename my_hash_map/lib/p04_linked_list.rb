@@ -20,25 +20,16 @@ class Node
   end
 
   def remove
-    previous = self.prev
-    debugger
-    if previous
-      previous.next = @next
+    if self.prev
+      self.prev.next = @next
     end 
-    
-    nex = self.next
-    if nex
-      nex.prev = @prev
+  
+    if self.next
+      self.next.prev = @prev
     end 
     
     self.next = nil
     self.prev = nil
-    
-    # self.prev.next = (self.prev ? self.next : nil)
-    # self.next.prev = (self.next ? self.prev : nil)
-
-    # self.next = nil
-    # self.prev = nil
 
     self
   end
@@ -77,6 +68,7 @@ class LinkedList
   end
 
   def include?(key)
+    one? { |node| node.key == key }
   end
 
   def append(key, val)
