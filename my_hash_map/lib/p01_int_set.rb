@@ -73,13 +73,21 @@ class ResizingIntSet
   end
 
   def insert(num)
-    return false if include?(num)
-    self[num] << num
-    
+    if num_buckets == count
+      resize!
+    end
+    unless self.include?(num) # why does self.include work and not just self[num]
+      self[num] << num
+      @count += 1
+    end
 
   end
 
   def remove(num)
+    if self.include?(num)
+      self[num].delete(num)
+      @count -= 1
+    end
   end
 
   def include?(num)
@@ -97,5 +105,10 @@ class ResizingIntSet
   end
 
   def resize!
+    new_arr = Array.new(num_buckets * 2) { Array.new }
+    store.each do |arr|
+      arr.each {|ele| new_arr[ele % new_arr.length] << ele }
+    end
+    @store = new_arr
   end
 end
